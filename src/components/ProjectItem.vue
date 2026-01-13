@@ -127,12 +127,15 @@ export default defineComponent({
     }
 
     const handleTouchStart = (e: TouchEvent) => {
-      touchStartX.value = e.touches[0].clientX
+      touchStartX.value = e.touches?.[0]?.clientX ?? 0
     }
 
     const handleTouchEnd = (e: TouchEvent) => {
-      touchEndX.value = e.changedTouches[0].clientX
-      handleSwipe()
+      const clientX = e.changedTouches?.[0]?.clientX
+      if (clientX !== undefined) {
+        touchEndX.value = clientX
+        handleSwipe()
+      }
     }
 
     const handleSwipe = () => {
