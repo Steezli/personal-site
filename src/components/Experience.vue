@@ -1,5 +1,5 @@
 <template>
-  <ContentSection title="Experience">
+  <ContentSection title="Where I've Worked" id="experience">
     <ExperienceItem
       v-for="(exp, index) in experiences"
       :key="index"

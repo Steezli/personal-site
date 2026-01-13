@@ -1,14 +1,15 @@
 <template>
-  <section class="contact">
-    <h2 class="section-title">Contact</h2>
+  <section id="contact" class="contact">
+    <h2 class="section-title">Let's Connect</h2>
+    <p class="contact-intro">Interested in working together or just want to chat? Feel free to reach out!</p>
     <div class="contact-info">
       <a :href="`mailto:${contact.email}`" class="contact-link">
         {{ contact.email }}
       </a>
       <a :href="contact.linkedin" target="_blank" rel="noopener" class="contact-link">
-        LinkedIn Profile
+        LinkedIn
       </a>
-      <span class="contact-link">{{ contact.location }}</span>
+      <span class="contact-location">{{ contact.location }}</span>
     </div>
   </section>
 </template>
@@ -33,6 +34,12 @@ export default defineComponent({
   margin-bottom: 3rem;
 }
 
+.contact-intro {
+  color: var(--color-text-secondary);
+  margin: 0 0 1.5rem 0;
+  font-size: 1.05rem;
+}
+
 .contact-info {
   display: flex;
   flex-direction: column;
@@ -42,11 +49,17 @@ export default defineComponent({
 .contact-link {
   color: var(--color-text);
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
 }
 
 .contact-link:hover {
   color: var(--color-primary);
+  transform: translateX(4px);
+}
+
+.contact-location {
+  color: var(--color-text-secondary);
 }
 
 @media (min-width: 768px) {

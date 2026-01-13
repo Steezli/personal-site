@@ -1,5 +1,5 @@
 <template>
-  <section class="section">
+  <section :id="id" class="section">
     <h2 class="section-title">{{ title }}</h2>
     <slot />
   </section>
@@ -14,6 +14,10 @@ export default defineComponent({
     title: {
       type: String,
       required: true
+    },
+    id: {
+      type: String,
+      default: undefined
     }
   }
 })

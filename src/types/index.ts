@@ -17,7 +17,17 @@ export interface Education {
 }
 
 export interface ContactInfo {
+  name?: string
   email: string
   linkedin: string
   location: string
+}
+
+export interface Project {
+  title: string
+  description: string
+  techStack: string[]
+  liveLink: string
+  screenshots: string[] // Array of up to 5 screenshot paths
+  githubLink?: string
 }

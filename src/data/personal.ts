@@ -1,6 +1,7 @@
-import type { Experience, Education, ContactInfo } from '@/types'
+import type { Experience, Education, ContactInfo, Project } from '@/types'
 
 export const contactInfo: ContactInfo = {
+  name: 'Eli Nicholson',
   email: 'eli.m.nicholson@gmail.com',
   linkedin: 'https://www.linkedin.com/in/eli-nicholson/',
   location: 'Greater Seattle, WA'
@@ -82,5 +83,21 @@ export const education: Education[] = [
     location: 'Portland, OR',
     startDate: '04/2019',
     endDate: '09/2019'
+  }
+]
+
+export const projects: Project[] = [
+  {
+    title: 'TofuRPG',
+    description: 'A tabletop RPG character management system built to streamline character creation and gameplay. Features include character sheet management, dice rolling mechanics, and campaign organization tools.',
+    techStack: ['Vue.js', 'TypeScript', 'Node.js', 'Express', 'PostgreSQL'],
+    liveLink: 'https://tofurpg.com',
+    screenshots: [
+      '/tofurpg-screenshot-1.png',
+      '/tofurpg-screenshot-2.png',
+      '/tofurpg-screenshot-3.png'
+      // Add up to 5 screenshots total
+    ]
+    // githubLink omitted - private repo or not available
   }
 ]

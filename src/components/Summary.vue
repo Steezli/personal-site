@@ -1,5 +1,5 @@
 <template>
-  <ContentSection title="Summary">
+  <ContentSection title="Summary" id="summary">
     <p class="summary-text">{{ summary }}</p>
   </ContentSection>
 </template>

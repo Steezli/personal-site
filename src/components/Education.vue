@@ -1,5 +1,5 @@
 <template>
-  <ContentSection title="Education">
+  <ContentSection title="Education" id="education">
     <EducationItem
       v-for="(edu, index) in education"
       :key="index"

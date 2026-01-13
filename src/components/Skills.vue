@@ -1,5 +1,5 @@
 <template>
-  <ContentSection title="Skills">
+  <ContentSection title="Technologies I Work With" id="skills">
     <div class="skills-list">
       <span
         v-for="(skill, index) in skills"

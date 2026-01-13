@@ -30,7 +30,35 @@ npm run dev
 npm run build
 ```
 
-The built files will be in the `dist` directory, ready for deployment to any static hosting service.
+The built files will be in the `dist` directory, ready for deployment.
+
+## Deployment
+
+### Railway Deployment
+
+This project is configured for Railway deployment. See [RAILWAY_DEPLOYMENT.md](./RAILWAY_DEPLOYMENT.md) for detailed instructions.
+
+**Quick Start:**
+1. Push your code to GitHub
+2. Go to [railway.app](https://railway.app) and create a new project
+3. Connect your GitHub repository
+4. Railway will automatically detect and deploy your application
+
+The project includes:
+- Express server (`server.js`) to serve static files
+- Railway configuration (`railway.json`)
+- Proper build and start scripts
+
+### Local Testing
+
+To test the production build locally:
+
+```bash
+npm run build
+npm start
+```
+
+The server will start on `http://localhost:3000`
 
 ## Setup GitHub Repository
 
