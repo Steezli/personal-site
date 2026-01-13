@@ -1,0 +1,25 @@
+@import './base.css';
+
+#app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-weight: normal;
+}
+
+:root {
+  --color-primary: hsla(160, 100%, 37%, 1);
+  --color-text-secondary: rgba(60, 60, 60, 0.7);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-text-secondary: rgba(235, 235, 235, 0.7);
+  }
+}
+
+@media (min-width: 1024px) {
+  #app {
+    padding: 3rem 4rem;
+  }
+}
