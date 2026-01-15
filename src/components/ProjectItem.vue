@@ -20,10 +20,11 @@
                 :src="screenshot"
                 :alt="`${project.title} screenshot ${index + 1}`"
                 class="project-screenshot"
+                @click="openModal(index)"
               />
             </div>
           </div>
-          
+
           <!-- Navigation buttons -->
           <button
             v-if="project.screenshots.length > 1"
@@ -41,7 +42,7 @@
           >
             ›
           </button>
-          
+
           <!-- Dots indicator -->
           <div
             v-if="project.screenshots.length > 1"
@@ -58,6 +59,49 @@
           </div>
         </div>
       </div>
+
+      <!-- Modal/Lightbox -->
+      <div
+        v-if="isModalOpen"
+        class="image-modal"
+        @click="closeModal"
+        @keydown.esc="closeModal"
+        tabindex="0"
+      >
+        <div class="modal-content" @click.stop>
+          <button class="modal-close" @click="closeModal" aria-label="Close modal">
+            ×
+          </button>
+          <img
+            :src="project.screenshots[currentModalIndex]"
+            :alt="`${project.title} screenshot ${currentModalIndex + 1}`"
+            class="modal-image"
+          />
+          <button
+            v-if="project.screenshots.length > 1"
+            class="modal-nav modal-nav-prev"
+            @click.stop="previousModalSlide"
+            aria-label="Previous image"
+          >
+            ‹
+          </button>
+          <button
+            v-if="project.screenshots.length > 1"
+            class="modal-nav modal-nav-next"
+            @click.stop="nextModalSlide"
+            aria-label="Next image"
+          >
+            ›
+          </button>
+          <div
+            v-if="project.screenshots.length > 1"
+            class="modal-counter"
+          >
+            {{ currentModalIndex + 1 }} / {{ project.screenshots.length }}
+          </div>
+        </div>
+      </div>
+
       <div class="project-details">
         <h3 class="project-title">{{ project.title }}</h3>
         <p class="project-description">{{ project.description }}</p>
@@ -95,7 +139,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, type PropType, ref, computed } from 'vue'
+import { defineComponent, type PropType, ref, computed, onMounted, onUnmounted } from 'vue'
 import type { Project } from '@/types'
 
 export default defineComponent({
@@ -111,6 +155,8 @@ export default defineComponent({
     const maxSlides = computed(() => Math.min(5, props.project.screenshots.length))
     const touchStartX = ref(0)
     const touchEndX = ref(0)
+    const isModalOpen = ref(false)
+    const currentModalIndex = ref(0)
 
     const nextSlide = () => {
       currentSlideIndex.value = (currentSlideIndex.value + 1) % maxSlides.value
@@ -125,6 +171,49 @@ export default defineComponent({
         currentSlideIndex.value = index
       }
     }
+
+    const openModal = (index: number) => {
+      currentModalIndex.value = index
+      isModalOpen.value = true
+      document.body.style.overflow = 'hidden'
+    }
+
+    const closeModal = () => {
+      isModalOpen.value = false
+      document.body.style.overflow = ''
+    }
+
+    const nextModalSlide = () => {
+      currentModalIndex.value = (currentModalIndex.value + 1) % props.project.screenshots.length
+    }
+
+    const previousModalSlide = () => {
+      currentModalIndex.value = currentModalIndex.value === 0
+        ? props.project.screenshots.length - 1
+        : currentModalIndex.value - 1
+    }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isModalOpen.value) return
+
+      if (e.key === 'Escape') {
+        closeModal()
+      } else if (e.key === 'ArrowLeft') {
+        previousModalSlide()
+      } else if (e.key === 'ArrowRight') {
+        nextModalSlide()
+      }
+    }
+
+    // Add keyboard event listener
+    onMounted(() => {
+      window.addEventListener('keydown', handleKeyDown)
+    })
+
+    onUnmounted(() => {
+      window.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = ''
+    })
 
     const handleTouchStart = (e: TouchEvent) => {
       touchStartX.value = e.touches?.[0]?.clientX ?? 0
@@ -153,9 +242,15 @@ export default defineComponent({
 
     return {
       currentSlideIndex,
+      isModalOpen,
+      currentModalIndex,
       nextSlide,
       previousSlide,
       goToSlide,
+      openModal,
+      closeModal,
+      nextModalSlide,
+      previousModalSlide,
       handleTouchStart,
       handleTouchEnd
     }
@@ -190,6 +285,7 @@ export default defineComponent({
   background-color: var(--color-background-soft);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
+  aspect-ratio: 16 / 9;
 }
 
 .project-item:hover .project-image-container {
@@ -200,26 +296,44 @@ export default defineComponent({
 .slideshow-wrapper {
   position: relative;
   width: 100%;
+  height: 100%;
   overflow: hidden;
-  aspect-ratio: 16 / 9;
+  cursor: pointer;
+  background-color: var(--color-background-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .slideshow-track {
   display: flex;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   width: 100%;
+  height: 100%;
 }
 
 .slide {
   min-width: 100%;
   flex-shrink: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .project-screenshot {
   width: 100%;
   height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.project-screenshot:hover {
+  opacity: 0.9;
 }
 
 .slideshow-nav {
@@ -370,6 +484,160 @@ export default defineComponent({
 
   .project-details {
     flex: 1;
+  }
+}
+
+/* Modal/Lightbox Styles */
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  animation: fadeIn 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+.modal-content {
+  position: relative;
+  max-width: 95%;
+  max-height: 95%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-image {
+  max-width: 100%;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.modal-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 1001;
+  backdrop-filter: blur(4px);
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.1);
+}
+
+.modal-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 32px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 1001;
+  backdrop-filter: blur(4px);
+}
+
+.modal-nav:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.modal-nav-prev {
+  left: -60px;
+}
+
+.modal-nav-next {
+  right: -60px;
+}
+
+.modal-counter {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .image-modal {
+    padding: 1rem;
+  }
+
+  .modal-image {
+    max-height: 85vh;
+  }
+
+  .modal-close {
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    font-size: 24px;
+  }
+
+  .modal-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+
+  .modal-nav-prev {
+    left: 10px;
+  }
+
+  .modal-nav-next {
+    right: 10px;
+  }
+
+  .modal-counter {
+    bottom: 10px;
   }
 }
 </style>

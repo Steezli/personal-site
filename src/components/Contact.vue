@@ -6,8 +6,17 @@
       <a :href="`mailto:${contact.email}`" class="contact-link">
         {{ contact.email }}
       </a>
+      <a v-if="contact.phone" :href="`tel:${contact.phone.replace(/[^0-9]/g, '')}`" class="contact-link">
+        {{ contact.phone }}
+      </a>
       <a :href="contact.linkedin" target="_blank" rel="noopener" class="contact-link">
         LinkedIn
+      </a>
+      <a v-if="contact.github" :href="contact.github" target="_blank" rel="noopener" class="contact-link">
+        GitHub
+      </a>
+      <a v-if="contact.website" :href="contact.website" target="_blank" rel="noopener" class="contact-link">
+        Website
       </a>
       <span class="contact-location">{{ contact.location }}</span>
     </div>

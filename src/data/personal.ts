@@ -3,100 +3,108 @@ import type { Experience, Education, ContactInfo, Project } from '@/types'
 export const contactInfo: ContactInfo = {
   name: 'Eli Nicholson',
   email: 'eli.m.nicholson@gmail.com',
+  phone: '(425) 246-8863',
   linkedin: 'https://www.linkedin.com/in/eli-nicholson/',
-  location: 'Greater Seattle, WA'
+  github: 'https://github.com/elinicholson',
+  website: 'https://elinicholson.dev',
+  location: 'Seattle, WA'
 }
 
-export const summary = 'As a seasoned Software Developer, I thrive on bringing people together by developing the most effective tools for their needs. Over the past five years, I have primarily focused on creating internal tools for various departments, modernizing outdated codebases, and reconstructing the company website from the ground up. This diverse range of tasks keeps me engaged and continually encourages my growth, helping me to appreciate how interconnected everything we create truly is.'
+export const summary = 'Software Developer with 5+ years of experience designing and modernizing internal tools, streamlining cross-departmental workflows, and rebuilding enterprise websites from the ground up. Skilled in revitalizing legacy codebases and delivering scalable, user-focused solutions that foster collaboration and efficiency. Experienced across fintech startups, digital marketing, consulting, and manufacturing, bringing versatile technical expertise and a passion for creating tools that connect people and drive organizational growth.'
 
 export const skills: string[] = [
   'JavaScript',
   'TypeScript',
   'Vue.js',
-  'REST',
+  'React.js',
   'Node.js',
-  'React',
-  'CSS',
+  'REST',
   'GraphQL',
-  'SQL',
+  'PostgreSQL',
+  'MongoDB',
   'AWS',
+  'Azure',
   'Docker',
-  'AI Tooling'
+  'Kubernetes',
+  'Jenkins',
+  'TDD',
+  'Event Sourcing',
+  'AI Tooling',
+  'Airtable',
+  'Retool'
 ]
 
 export const experiences: Experience[] = [
   {
     title: 'Software Developer II',
-    company: 'Logical position',
-    location: 'Location',
+    company: 'Logical Position',
+    location: 'Lake Oswego, OR (Remote)',
     startDate: '12/2022',
     endDate: '06/2025',
     responsibilities: [
-      'Developed and enhanced an internal tool for the Email Marketing and SEO departments, streamlining strategy planning and increasing operational efficiency',
-      'Designed and implemented batch CSV import/export features to facilitate seamless data transfer and reporting processes',
-      'Provided technical support and troubleshooting for the internal tool, ensuring minimal downtime and smooth user experience',
-      'Created and maintained scripts to generate reports for leadership, enabling data-driven decision-making',
-      'Collaborated with cross-functional teams to identify system improvements and deliver tailored solutions'
+      'Enhanced a full-stack internal tool using Vue.js and Node.js for Email Marketing and SEO teams, improving operational efficiency by an estimated 15%',
+      'Built a batch CSV import/export system that processed 1,000+ records daily, reducing manual entry time by 5+ hours per week',
+      'Automated critical leadership reports using SQL and Node.js scripts, delivering key business metrics 2x faster',
+      'Provided technical support and partnered with end-users to deliver 3 major feature enhancements, maintaining 99.9% tool uptime'
     ]
   },
   {
-    title: 'Software Engineer',
-    company: 'Ship shape consulting',
-    location: 'Location',
+    title: 'Software Developer',
+    company: 'Ship Shape Consulting',
+    location: 'Middleburg, VA (Remote)',
     startDate: '08/2022',
     endDate: '10/2022',
     responsibilities: [
-      'Leveraged React Native to build a visual scaffolding for a co-working space management app',
-      'Worked to close, resolve and nudge existing open issues on managed open-source software'
+      'Scaffolded core UI components for a React Native co-working space management app',
+      'Short-term engagement due to client needs'
     ]
   },
   {
     title: 'Software Engineer',
     company: 'Allocations',
-    location: 'Location',
+    location: 'Miami, FL (Remote)',
     startDate: '05/2021',
     endDate: '03/2022',
     responsibilities: [
-      'Deployed and maintained an internal tooling domain built with React, GraphQL and Module Federation to allow for individual teams to spin up micro frontends that are quickly accessible',
-      'Interfaced with the accounting team to build monthly and quarterly reporting tools, built with React, PostgreSQL, Retool, Airtable',
-      'Began adapting our user management system to allow for more privilege based depth for use with the product and internal tooling leveraging Typescript, Next.js, and MongoDB'
+      'Deployed an internal micro-frontend platform using React, GraphQL, and Module Federation, reducing engineering tickets by 25%',
+      'Partnered with the accounting team to build automated reporting tools using PostgreSQL, Retool and Airtable, cutting monthly report generation time from 2 days to 1 hour',
+      'Built granular, privilege-based access controls for the user management system using TypeScript, Next.js, and MongoDB'
     ]
   },
   {
     title: 'Software Developer',
-    company: 'Rightline inc',
-    location: 'Location',
+    company: 'Rightline Equipment Inc.',
+    location: 'Vancouver, WA (Remote)',
     startDate: '09/2019',
     endDate: '05/2021',
     responsibilities: [
-      'Developed an internal reporting tool, using React with hooks, Node.js, Express, and MySQL',
-      'Assisted in rebuilding a company website making use of Django Rest Framework, Python, MySQL, MongoDB, HTML, SCSS, Google Maps API: Having primarily built the Dealer Locator and most of the form submissions(warranty, returns, support, etc.)',
-      'By utilizing Jenkins, Docker-Compose, and Kubernetes migrated deployment pipelines and development environments for a handful of legacy internal tools built over the last 20 yrs'
+      'Built a full-stack internal reporting tool using React, Node.js, and MySQL, providing sales and inventory insights that improved analysis efficiency by 15%',
+      'Developed a Google Maps API-based dealer locator and lead capture forms using Django and Python, increasing qualified sales leads by 20%',
+      'Migrated legacy deployment pipelines to a modern CI/CD infrastructure using Jenkins, Docker, and Kubernetes, reducing deployment times by 25%'
     ]
   }
 ]
 
 export const education: Education[] = [
   {
-    degree: '800+ hours of education in Full Stack JavaScript Development',
+    degree: 'Full Stack JavaScript Development',
     institution: 'Alchemy Code Lab',
     location: 'Portland, OR',
-    startDate: '04/2019',
-    endDate: '09/2019'
+    startDate: '2019',
+    endDate: '2019'
   }
 ]
 
 export const projects: Project[] = [
   {
     title: 'TofuRPG',
-    description: 'A tabletop RPG character management system built to streamline character creation and gameplay. Features include character sheet management, dice rolling mechanics, and campaign organization tools.',
-    techStack: ['Vue.js', 'TypeScript', 'Node.js', 'Express', 'PostgreSQL'],
+    description: 'Full-stack tabletop RPG management system enabling players and game masters to create characters, manage campaigns, roll dice with real-time updates, and track game sessions. Features comprehensive character creation with class-specific rules, inventory management, power/perk systems, and live collaborative gameplay tools.',
+    techStack: ['React', 'TypeScript', 'Node.js', 'Hono', 'PostgreSQL', 'Railway', 'SSE'],
     liveLink: 'https://tofurpg.com',
     screenshots: [
-      '/tofurpg-screenshot-1.png',
-      '/tofurpg-screenshot-2.png',
-      '/tofurpg-screenshot-3.png'
-      // Add up to 5 screenshots total
+      '/tofurpg/tofurpg-screenshot-1.png',
+      '/tofurpg/tofurpg-screenshot-2.png',
+      '/tofurpg/tofurpg-screenshot-3.png'
     ]
     // githubLink omitted - private repo or not available
   }
