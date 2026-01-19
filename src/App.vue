@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <SiteHeader />
+    <FloatingContact :contact="contactInfo" />
     <div class="content">
       <AboutMeSection />
       <ProjectsSection :projects="projects" />
@@ -11,7 +12,6 @@
         :skills="skills"
         :education="education"
       />
-      <ContactSection :contact="contactInfo" />
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@ import SiteHeader from './components/Header.vue'
 import AboutMeSection from './components/AboutMe.vue'
 import ProjectsSection from './components/Projects.vue'
 import ResumeSection from './components/Resume.vue'
-import ContactSection from './components/Contact.vue'
+import FloatingContact from './components/FloatingContact.vue'
 import {
   contactInfo,
   summary,
@@ -39,7 +39,7 @@ export default defineComponent({
     AboutMeSection,
     ProjectsSection,
     ResumeSection,
-    ContactSection
+    FloatingContact
   },
   data() {
     return {

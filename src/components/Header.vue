@@ -35,8 +35,7 @@ export default defineComponent({
       navLinks: [
         { id: 'about-me', label: 'About' },
         { id: 'projects', label: 'Projects' },
-        { id: 'resume', label: 'Resume' },
-        { id: 'contact', label: 'Contact' }
+        { id: 'resume', label: 'Resume' }
       ] as NavLink[]
     }
   },
