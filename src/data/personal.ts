@@ -3,7 +3,6 @@ import type { Experience, Education, ContactInfo, Project } from '@/types'
 export const contactInfo: ContactInfo = {
   name: 'Eli Nicholson',
   email: 'eli.m.nicholson@gmail.com',
-  phone: '(425) 246-8863',
   linkedin: 'https://www.linkedin.com/in/eli-nicholson/',
   github: 'https://github.com/elinicholson',
   website: 'https://elinicholson.dev',
