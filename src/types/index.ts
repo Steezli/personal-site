@@ -19,7 +19,6 @@ export interface Education {
 export interface ContactInfo {
   name?: string
   email: string
-  phone?: string
   linkedin: string
   github?: string
   website?: string
