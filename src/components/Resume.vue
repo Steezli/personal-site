@@ -21,8 +21,6 @@
             <div class="resume-title">Fullstack Software Developer</div>
             <div class="resume-contact-details">
               <span>{{ contactInfo.email }}</span>
-              <span v-if="contactInfo.phone">•</span>
-              <span v-if="contactInfo.phone">{{ contactInfo.phone }}</span>
               <span>•</span>
               <a :href="contactInfo.linkedin" target="_blank" rel="noopener">LinkedIn</a>
               <span v-if="contactInfo.github">•</span>
